@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: sample
+Resources:
+  SamSample:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler # 実行するハンドラ
+      Runtime: nodejs4.3 # lambda のランタイムを書く
+      Role: arn:aws:iam::1234567890:role/sam-test-role # 上の手順で作った IAM Role の Arn
+      Timeout: 60 # Lambda のタイムアウト
+      Events:
+        GetResource: # API Gateway 側の識別子
+          Type: Api
+          Properties:
+            Path: /test # API Gateway のリソースのパス
+            Method: put # API Gateway のメソッド
